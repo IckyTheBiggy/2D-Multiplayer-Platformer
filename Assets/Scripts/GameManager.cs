@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         _instance = GetComponent<GameManager>();
     }
     
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private Transform _playerSpawnPos;
+    
     private Camera _mainCam;
     public Camera MainCam => _mainCam = _mainCam == null ? Camera.main : _mainCam;
+
+    [HideInInspector] public GameObject Player;
+    
+    private void Start()
+    {
+        Player =
+            PhotonNetwork.Instantiate(_playerPrefab.name, Vector2.zero, Quaternion.identity);
+    }
 }
