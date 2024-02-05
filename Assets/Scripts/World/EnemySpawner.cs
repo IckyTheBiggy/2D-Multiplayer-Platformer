@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(_spawnRate);
-            PhotonNetwork.Instantiate(_enemyPrefab.name, Vector2.zero, Quaternion.identity);
+            Instantiate(_enemyPrefab, Vector2.zero, Quaternion.identity);
         }
     }
 }

@@ -9,6 +9,7 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
 {
     [Header("Referances")] 
     [SerializeField] private PhotonView _pv;
+    [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private ParticleSystem _damageParticles;
     
     [Header("Values")] 
@@ -19,6 +20,7 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
     [SerializeField] private float _attackSpeed;
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private bool _canShoot;
 
     private float _health;
     private float _attackGracePeriod;
@@ -39,9 +41,20 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
 
             if (distanceToPlayer <= _attackDistance)
             {
-                if (_attackGracePeriod <= 0)
+                if (_attackGracePeriod <= 0 && !_canShoot)
                 {
                     DamagePlayer(closestPlayer);
+                    _attackGracePeriod = 1f / _attackSpeed;
+                }
+
+                if (_attackGracePeriod <= 0 && _canShoot)
+                {
+                    Vector3 shootDirection = (transform.position - closestPlayer.transform.position).normalized;
+                    
+                    float angle = Mathf.Atan2(-shootDirection.y, -shootDirection.x) * Mathf.Rad2Deg;
+                    Quaternion direction = Quaternion.AngleAxis(angle, Vector3.forward);
+                    
+                    ShootPlayer(direction);
                     _attackGracePeriod = 1f / _attackSpeed;
                 }
 
@@ -85,16 +98,24 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
         return closestPlayer;
     }
 
+    private void ShootPlayer(Quaternion direction)
+    {
+        var bullet =
+        Instantiate(_bulletPrefab, transform.position, direction);
+
+        bullet.GetComponent<BulletScript>().Damage = _damage;
+    }
+
     public void TakeDamage(float damage)
     {
         _health -= damage;
         
         if (_health <= 0)
         {
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
         }
 
-        PhotonNetwork.Instantiate(_damageParticles.name, transform.position, Quaternion.identity);
+        Instantiate(_damageParticles, transform.position, Quaternion.identity);
     }
 
     private void DamagePlayer(GameObject player)

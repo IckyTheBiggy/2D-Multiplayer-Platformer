@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,13 @@ using Unity.VisualScripting;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    void Start()
+    [HideInInspector] public List<GameObject> Players = new();
+    
+    [SerializeField] private GameObject _playerPrefab;
+    
+    public GameObject Player;
+
+    private void Start()
     {
         
     }

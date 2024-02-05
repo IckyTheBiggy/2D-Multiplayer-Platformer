@@ -142,7 +142,6 @@ GameObject:
   - component: {fileID: 7961206116060528102}
   - component: {fileID: 1693059448065156432}
   - component: {fileID: 2433332412661113424}
-  - component: {fileID: 7491832985852956418}
   - component: {fileID: 2372866133621660539}
   m_Layer: 8
   m_Name: Enemy
@@ -180,16 +179,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pv: {fileID: 2433332412661113424}
-  _damageParticles: {fileID: 0}
+  _bulletPrefab: {fileID: 7331458644505130230, guid: 34ff769ae8c67f5debaceed327ab1340, type: 3}
+  _damageParticles: {fileID: 3697782654673013597, guid: 48bdb3bae2695e48180ca2242702f53e, type: 3}
   _maxHealth: 50
-  _detectionRange: 8
+  _detectionRange: 10
   _speed: 9
-  _attackDistance: 5
+  _attackDistance: 2
   _attackSpeed: 1
   _damage: 10
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  _canShoot: 0
 --- !u!50 &1693059448065156432
 Rigidbody2D:
   serializedVersion: 4
@@ -236,23 +237,10 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 7491832985852956418}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7491832985852956418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355999437837318225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154c6bb89963cc867b9f1452fa4a0fc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lerpSpeed: 15
 --- !u!61 &2372866133621660539
 BoxCollider2D:
   m_ObjectHideFlags: 0

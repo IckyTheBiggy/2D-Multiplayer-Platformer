@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private GameObject _cameras;
     [SerializeField] private GameObject _ui;
+    [SerializeField] private ParticleSystem _landing_JumpingParticles;
 
     [Header("Values")] 
     [SerializeField] private float _counterMovement;
@@ -109,10 +110,5 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(_groundCheck.position, 0.2f, _groundLayer);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        
     }
 }

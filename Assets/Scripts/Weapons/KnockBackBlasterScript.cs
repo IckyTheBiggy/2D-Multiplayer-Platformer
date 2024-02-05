@@ -16,7 +16,7 @@ public class KnockBackBlasterScript : MonoBehaviour
     private void Start()
     {
         _pv = GameManager.Instance.Player.GetComponentInChildren<PhotonView>();
-        
+
         _playerCam = GameManager.Instance.MainCam;
         _playerTransform = GameManager.Instance.Player.transform;
         _rb = GameManager.Instance.Player.GetComponentInChildren<Rigidbody2D>();

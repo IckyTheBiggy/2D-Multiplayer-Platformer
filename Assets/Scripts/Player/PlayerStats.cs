@@ -19,11 +19,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         CurrentHealth = Health;
         _uiManager.UpdateHealthBar();
+        _uiManager.UpdateStatsUI();
     }
 
     private void KillPlayer()
     {
-        Debug.Log("Killed Player");
         transform.position = Vector2.zero;
         CurrentHealth = Health;
         _uiManager.UpdateHealthBar();
