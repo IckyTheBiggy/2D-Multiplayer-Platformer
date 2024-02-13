@@ -48,12 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pv: {fileID: 5432486428402977566}
+  _muzzleFlash: {fileID: 0}
   _fireRate: 0.4
   _damage: 10
   _gunPoint: {fileID: 4741146987627859833}
   _bulletPrefab: {fileID: 7331458644505130230, guid: 0b5d77f6c598495649bd534dbee93828, type: 3}
-  _recoilIntensity: 0.1
-  _recoilDuration: 0.1
 --- !u!114 &5432486428402977566
 MonoBehaviour:
   m_ObjectHideFlags: 0

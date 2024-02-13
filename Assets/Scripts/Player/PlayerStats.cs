@@ -14,79 +14,37 @@ public class PlayerStats : MonoBehaviour, IDamageable
         Range,
         Damage
     }
-    
-    [SerializeField] private UIManager _uiManager;
-    
-    [System.Serializable]
-    public struct StatItem
-    {
-        public float Health;
-        public float MaxSpeed;
-        public float Speed;
-        public float ShootSpeed;
-        public float Range;
-        public float Damage;
-    }
 
-    public StatItem Stats;
+    [SerializeField] private UIManager _uiManager;
+    [SerializeField] private List<Stat> _stats;
+    
+    public List<Stat> Stats => _stats;
     
     [HideInInspector] public float CurrentHealth;
 
     public void AffectStat(StatTypes type, float amount, bool multiply = false)
     {
         if (multiply)
-        {
-            if (type == StatTypes.Health)
-                Stats.Health *= amount;
-        
-            if (type == StatTypes.MaxSpeed)
-                Stats.MaxSpeed *= amount;
-        
-            if (type == StatTypes.Speed)
-                Stats.Speed *= amount;
-        
-            if (type == StatTypes.ShootSpeed)
-                Stats.ShootSpeed *= amount;
-        
-            if (type == StatTypes.Range)
-                Stats.Range *= amount;
-        
-            if (type == StatTypes.Damage)
-                Stats.Damage *= amount;
-        }
-
+            Stats.Find(x => x.Type == type).Value *= amount;
         else
-        {
-            if (type == StatTypes.Health)
-                Stats.Health += amount;
-        
-            if (type == StatTypes.MaxSpeed)
-                Stats.MaxSpeed += amount;
-        
-            if (type == StatTypes.Speed)
-                Stats.Speed += amount;
-        
-            if (type == StatTypes.ShootSpeed)
-                Stats.ShootSpeed += amount;
-        
-            if (type == StatTypes.Range)
-                Stats.Range += amount;
-        
-            if (type == StatTypes.Damage)
-                Stats.Damage += amount;
-        }
+            _stats.Find(x => x.Type == type).Value += amount;
+    }
+
+    public float GetStatAmount(StatTypes type)
+    {
+        return Stats.Find(x => x.Type == type).Value;
     }
 
     private void Start()
     {
-        CurrentHealth = Stats.Health;
+        CurrentHealth = GetStatAmount(StatTypes.Health);
         _uiManager.UpdateHealthBar();
     }
 
     private void KillPlayer()
     {
         transform.position = Vector2.zero;
-        CurrentHealth = Stats.Health;
+        CurrentHealth = GetStatAmount(StatTypes.Health);
         _uiManager.UpdateHealthBar();
     }
     

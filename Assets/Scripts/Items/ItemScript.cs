@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class ItemScript : MonoBehaviour, IPickupable
 {
-    [SerializeField] private List<PlayerStats.StatTypes> _types;
+    [System.Serializable]
+    public struct AffectStatItem
+    {
+        public PlayerStats.StatTypes Type;
+        public float Amount;
+    }
+    
+    [SerializeField] private List<AffectStatItem> _types;
     [SerializeField] private GameObject _sprite;
     [SerializeField] private ParticleSystem _itemPickupParticles;
     
@@ -41,7 +48,7 @@ public class ItemScript : MonoBehaviour, IPickupable
     {
         foreach (var type in _types)
         {
-            GameManager.Instance.PlayerStats.AffectStat(type, amount);
+            GameManager.Instance.PlayerStats.AffectStat(type.Type, type.Amount);
         }
     }
 
@@ -49,7 +56,7 @@ public class ItemScript : MonoBehaviour, IPickupable
     {
         foreach (var type in _types)
         {
-           GameManager.Instance.PlayerStats.AffectStat(type, amount);
+           GameManager.Instance.PlayerStats.AffectStat(type.Type, type.Amount, true);
         }
     }
 }

@@ -136,9 +136,9 @@ MonoBehaviour:
   _rb: {fileID: -8015702207929740836}
   _bulletCollisionParticles: {fileID: 5062204181651002881, guid: fa4e763ff0306d30d8df20cdcddbf175, type: 3}
   _collisionTag: Enemy
-  _bulletSpeed: 750
   _bulletLifetime: 3
   _isEnemyBullet: 0
+  BulletSpeed: 750
   Damage: 0
 --- !u!114 &-8123690770807181977
 MonoBehaviour:

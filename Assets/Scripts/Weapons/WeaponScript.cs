@@ -6,6 +6,7 @@ using Photon.Pun;
 public class WeaponScript : MonoBehaviour
 {
     [SerializeField] private PhotonView _pv;
+    [SerializeField] private ParticleSystem _muzzleFlash;
     
     [SerializeField] private float _fireRate;
     [SerializeField] private float _damage;
@@ -42,7 +43,10 @@ public class WeaponScript : MonoBehaviour
         var bullet = 
         Instantiate(_bulletPrefab, _gunPoint.position, _gunPoint.rotation);
 
-        bullet.GetComponent<BulletScript>().Damage = _damage;
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+
+        bulletScript.BulletSpeed *= GameManager.Instance.PlayerStats.GetStatAmount(PlayerStats.StatTypes.ShootSpeed);
+        bulletScript.Damage = _damage * GameManager.Instance.PlayerStats.GetStatAmount(PlayerStats.StatTypes.Damage);
         bullet.GetComponent<Rigidbody2D>().velocity += GameManager.Instance.Player.GetComponentInChildren<Rigidbody2D>().velocity / 2;
 
         _timeToNextShot = _fireRate;

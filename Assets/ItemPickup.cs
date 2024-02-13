@@ -9,7 +9,6 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            Debug.Log("#");
             other.GetComponent<IPickupable>().Pickup();
         }
     }

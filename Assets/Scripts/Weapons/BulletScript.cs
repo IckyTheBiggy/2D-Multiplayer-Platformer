@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BulletScript : MonoBehaviour
 {
@@ -10,17 +11,18 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private ParticleSystem _bulletCollisionParticles;
     [SerializeField] private string _collisionTag;
     
-    [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _bulletLifetime;
     [SerializeField] private bool _isEnemyBullet;
 
+    public float BulletSpeed;
     [HideInInspector] public float Damage;
 
     private float _bulletTime;
 
     private IEnumerator Start()
     {
-        _rb.AddForce(transform.right * _bulletSpeed);
+        _rb.AddForce(transform.right * BulletSpeed);
+        Debug.Log(BulletSpeed);
         
         yield return new WaitForSeconds(_bulletLifetime);
         Destroy(gameObject);

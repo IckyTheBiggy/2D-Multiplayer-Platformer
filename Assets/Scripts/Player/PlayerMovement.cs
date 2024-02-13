@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(_ui);
         }
         
-        _initalSpeed = _playerStats.Stats.Speed;
+        _initalSpeed = _playerStats.GetStatAmount(PlayerStats.StatTypes.Speed);
     }
     
     void Update()
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_pv.IsMine)
             return;
-        _rb.AddForce(new Vector2(_horizontalInput * _playerStats.Stats.Speed, 0.0f), ForceMode2D.Force);
+        _rb.AddForce(new Vector2(_horizontalInput * _playerStats.GetStatAmount(PlayerStats.StatTypes.Speed), 0.0f), ForceMode2D.Force);
 
         if (IsGrounded() && Mathf.Approximately(_horizontalInput, 0.0f))
         {
@@ -79,9 +79,9 @@ public class PlayerMovement : MonoBehaviour
             _rb.AddForce(new Vector2(counterForce, 0.0f), ForceMode2D.Force);
         }
 
-        if (Mathf.Abs(_rb.velocity.x) > _playerStats.Stats.MaxSpeed)
+        if (Mathf.Abs(_rb.velocity.x) > _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed))
         {
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _playerStats.Stats.MaxSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed), _rb.velocity.y);
         }
 
         if (_horizontalInput > 0 || _horizontalInput < 0)

@@ -13,8 +13,16 @@ public class WaveManager : MonoBehaviour
         public float SpawnChance;
     }
     
+    [Serializable]
+    public struct Item
+    {
+        public GameObject ItemPrefab;
+        public float DropChance;
+    }
+    
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private List<EnemyItem> _enemies;
+    [SerializeField] private List<Item> _items;
     
     [SerializeField] private float _timeBetweenWaves;
     [SerializeField] private int _timeBetweenEnemySpawns;
@@ -66,9 +74,33 @@ public class WaveManager : MonoBehaviour
         return null;
     }
 
+    private GameObject GetRandomItem()
+    {
+        float totalDropChance = 0f;
+
+        foreach (var item in _items)
+        {
+            totalDropChance += item.DropChance;
+        }
+
+        float randomItem = Random.Range(0f, totalDropChance);
+        float currentDropChance = 0f;
+
+        foreach (var item in _items)
+        {
+            currentDropChance += item.DropChance;
+
+            if (randomItem <= currentDropChance)
+                return item.ItemPrefab;
+        }
+        
+        return null;
+    }
+
     private void SpawnItem()
     {
-        
+        GameObject itemPrefab = GetRandomItem();
+        Instantiate(itemPrefab, new Vector2(-16f, -4f), Quaternion.identity);
     }
 
     private IEnumerator SpawnWaveRoutine()
