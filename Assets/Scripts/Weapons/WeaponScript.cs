@@ -12,11 +12,12 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] private Transform _gunPoint;
     [SerializeField] private GameObject _bulletPrefab;
 
+    private Vector3 _startPos;
     private float _timeToNextShot;
     
     void Start()
     {
-        
+        _startPos = transform.localPosition;
     }
     
     void Update()
@@ -29,7 +30,7 @@ public class WeaponScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
             Shoot();
     }
-
+    
     private void Shoot()
     {
         if (_timeToNextShot > 0)

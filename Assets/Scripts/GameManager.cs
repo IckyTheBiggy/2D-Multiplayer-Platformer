@@ -41,4 +41,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Camera MainCam => _mainCam = _mainCam == null ? Camera.main : _mainCam;
     
     public GameObject Player;
+    public WaveManager WaveManager;
+
+    [HideInInspector] public PlayerStats PlayerStats;
+    [HideInInspector] public UIManager UIManager;
+
+    private void Start()
+    {
+        PlayerStats = Player.GetComponentInChildren<PlayerStats>();
+        UIManager = Player.GetComponentInChildren<UIManager>();
+    }
 }

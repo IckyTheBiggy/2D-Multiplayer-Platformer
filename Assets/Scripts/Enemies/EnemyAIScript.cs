@@ -112,6 +112,8 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
         
         if (_health <= 0)
         {
+            GameManager.Instance.WaveManager.EnemiesLeft--;
+            GameManager.Instance.UIManager.UpdateEnemiesLeftText();
             Destroy(gameObject);
         }
 

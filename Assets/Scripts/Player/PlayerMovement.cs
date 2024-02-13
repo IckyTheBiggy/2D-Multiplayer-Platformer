@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Referances")] 
     [SerializeField] private PhotonView _pv;
+    [SerializeField] private Transform _crosshairSprite;
     
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private PlayerStats _playerStats;
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
+        Cursor.visible = false;
+        
         if (!_pv.IsMine)
         {
             Destroy(_cameras);
@@ -40,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(_ui);
         }
         
-        _initalSpeed = _playerStats.Speed;
+        _initalSpeed = _playerStats.Stats.Speed;
     }
     
     void Update()
@@ -59,13 +62,16 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
         }
+
+        Vector2 mousePos = GameManager.Instance.MainCam.ScreenToWorldPoint(Input.mousePosition);
+        _crosshairSprite.transform.position = mousePos;
     }
 
     private void FixedUpdate()
     {
         if (!_pv.IsMine)
             return;
-        _rb.AddForce(new Vector2(_horizontalInput * _playerStats.Speed, 0.0f), ForceMode2D.Force);
+        _rb.AddForce(new Vector2(_horizontalInput * _playerStats.Stats.Speed, 0.0f), ForceMode2D.Force);
 
         if (IsGrounded() && Mathf.Approximately(_horizontalInput, 0.0f))
         {
@@ -73,9 +79,9 @@ public class PlayerMovement : MonoBehaviour
             _rb.AddForce(new Vector2(counterForce, 0.0f), ForceMode2D.Force);
         }
 
-        if (Mathf.Abs(_rb.velocity.x) > _playerStats.MaxSpeed)
+        if (Mathf.Abs(_rb.velocity.x) > _playerStats.Stats.MaxSpeed)
         {
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _playerStats.MaxSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _playerStats.Stats.MaxSpeed, _rb.velocity.y);
         }
 
         if (_horizontalInput > 0 || _horizontalInput < 0)
