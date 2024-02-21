@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : NetworkBehaviour
 {
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private ParticleSystem _bulletCollisionParticles;
@@ -19,13 +20,11 @@ public class BulletScript : MonoBehaviour
 
     private float _bulletTime;
 
-    private IEnumerator Start()
+    private void Start()
     {
-        _rb.AddForce(transform.right * BulletSpeed);
-        Debug.Log(BulletSpeed);
+        _rb.AddForce(transform.right * BulletSpeed, ForceMode2D.Impulse);
         
-        yield return new WaitForSeconds(_bulletLifetime);
-        Destroy(gameObject);
+        Destroy(gameObject, _bulletLifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

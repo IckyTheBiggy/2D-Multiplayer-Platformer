@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using Photon.Pun;
 using Unity.VisualScripting;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : NetworkBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance
@@ -34,21 +34,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         _instance = GetComponent<GameManager>();
     }
-
-    [SerializeField] private GameObject _playerPrefab;
-
+    
     private Camera _mainCam;
     public Camera MainCam => _mainCam = _mainCam == null ? Camera.main : _mainCam;
     
-    public GameObject Player;
     public WaveManager WaveManager;
-
-    [HideInInspector] public PlayerStats PlayerStats;
-    [HideInInspector] public UIManager UIManager;
-
-    private void Start()
-    {
-        PlayerStats = Player.GetComponentInChildren<PlayerStats>();
-        UIManager = Player.GetComponentInChildren<UIManager>();
-    }
 }

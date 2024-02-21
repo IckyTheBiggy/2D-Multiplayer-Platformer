@@ -2,13 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using Unity.VisualScripting;
 
 public class EnemyAIScript : MonoBehaviour, IDamageable
 {
     [Header("Referances")] 
-    [SerializeField] private PhotonView _pv;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private ParticleSystem _damageParticles;
     
@@ -25,10 +23,12 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
     private float _health;
     private float _attackGracePeriod;
     private bool _canAttack;
+    private bool _alive;
 
     private void Start()
     {
         _health = _maxHealth;
+        _alive = true;
     }
 
     private void Update()
@@ -112,9 +112,13 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
         
         if (_health <= 0)
         {
-            GameManager.Instance.WaveManager.EnemiesLeft--;
-            GameManager.Instance.UIManager.UpdateEnemiesLeftText();
-            Destroy(gameObject);
+            if (_alive)
+            {
+                GameManager.Instance.WaveManager.EnemiesLeft--;
+                //GameManager.Instance.UIManager.UpdateEnemiesLeftText();
+                _alive = false;
+                Destroy(gameObject);
+            }
         }
 
         Instantiate(_damageParticles, transform.position, Quaternion.identity);

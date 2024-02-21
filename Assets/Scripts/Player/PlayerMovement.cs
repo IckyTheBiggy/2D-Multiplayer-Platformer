@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Referances")] 
-    [SerializeField] private PhotonView _pv;
+    [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private Transform _crosshairSprite;
     
     [SerializeField] private Rigidbody2D _rb;
@@ -34,21 +34,23 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
-        Cursor.visible = false;
-        
-        if (!_pv.IsMine)
+        if (IsOwner)
         {
-            Destroy(_cameras);
-            Destroy(_rb);
-            Destroy(_ui);
+            _playerManager.Camera = _cameras.GetComponentInChildren<Camera>();
+            _cameras.transform.parent = null;
         }
+        
+        if (!IsOwner)
+            Destroy(_cameras);
+        
+        Cursor.visible = false;
         
         _initalSpeed = _playerStats.GetStatAmount(PlayerStats.StatTypes.Speed);
     }
     
     void Update()
     {
-        if (!_pv.IsMine)
+        if (!IsOwner)
             return;
         
         _horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -69,8 +71,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_pv.IsMine)
-            return;
         _rb.AddForce(new Vector2(_horizontalInput * _playerStats.GetStatAmount(PlayerStats.StatTypes.Speed), 0.0f), ForceMode2D.Force);
 
         if (IsGrounded() && Mathf.Approximately(_horizontalInput, 0.0f))

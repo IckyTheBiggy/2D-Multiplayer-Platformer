@@ -11,6 +11,8 @@ public class ItemScript : MonoBehaviour, IPickupable
         public PlayerStats.StatTypes Type;
         public float Amount;
     }
+
+    [SerializeField] private GameObject _player;
     
     [SerializeField] private List<AffectStatItem> _types;
     [SerializeField] private GameObject _sprite;
@@ -36,10 +38,11 @@ public class ItemScript : MonoBehaviour, IPickupable
     public void Pickup()
     {
         if (!_isMultiplyer)
-            AddStats(GameManager.Instance.PlayerStats, _increaseAmount);
+            AddStats(_player.GetComponent<PlayerStats>(), _increaseAmount);
         else
-            MultiplyStats(GameManager.Instance.PlayerStats, _increaseAmount);
+            MultiplyStats(_player.GetComponent<PlayerStats>(), _increaseAmount);
 
+        _player.GetComponent<ItemManager>().CollectedItems.Add(gameObject);
         Instantiate(_itemPickupParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -48,7 +51,7 @@ public class ItemScript : MonoBehaviour, IPickupable
     {
         foreach (var type in _types)
         {
-            GameManager.Instance.PlayerStats.AffectStat(type.Type, type.Amount);
+            _player.GetComponent<PlayerStats>().AffectStat(type.Type, type.Amount);
         }
     }
 
@@ -56,7 +59,7 @@ public class ItemScript : MonoBehaviour, IPickupable
     {
         foreach (var type in _types)
         {
-           GameManager.Instance.PlayerStats.AffectStat(type.Type, type.Amount, true);
+           _player.GetComponent<PlayerStats>().AffectStat(type.Type, type.Amount, true);
         }
     }
 }

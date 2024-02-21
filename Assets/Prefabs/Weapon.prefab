@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1448852612233786842}
   - component: {fileID: 1091932317501740661}
-  - component: {fileID: 5432486428402977566}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -47,34 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44a460e0f5112fb855577ed24a378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pv: {fileID: 5432486428402977566}
+  _player: {fileID: 0}
+  _playerManager: {fileID: 0}
   _muzzleFlash: {fileID: 0}
   _fireRate: 0.4
   _damage: 10
   _gunPoint: {fileID: 4741146987627859833}
   _bulletPrefab: {fileID: 7331458644505130230, guid: 0b5d77f6c598495649bd534dbee93828, type: 3}
---- !u!114 &5432486428402977566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794457745069649854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &3141685688167331521
 GameObject:
   m_ObjectHideFlags: 0
