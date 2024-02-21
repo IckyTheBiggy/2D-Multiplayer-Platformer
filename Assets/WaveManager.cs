@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -48,10 +48,10 @@ public class WaveManager : MonoBehaviour
     {
         if (_canSpawnNextWave && EnemiesLeft <= 0)
         {
-            SpawnItemServerRpc();
+            var itemPrefab = GetRandomItem();
+            PhotonNetwork.Instantiate(itemPrefab.name, new Vector2(-16f, -4f), Quaternion.identity);
             StartCoroutine(SpawnWaveRoutine());
             _canSpawnNextWave = false;
-            Debug.Log("Next wave spawning...");
         }
     }
     
@@ -95,26 +95,6 @@ public class WaveManager : MonoBehaviour
         
         return null;
     }
-
-    [ServerRpc]
-    private void SpawnEnemyServerRpc()
-    {
-        GameObject enemyPrefab = GetRandomEnemy();
-        var enemy =
-            Instantiate(enemyPrefab, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
-        
-        enemy.GetComponent<NetworkObject>().Spawn();
-    }
-
-    [ServerRpc]
-    private void SpawnItemServerRpc()
-    {
-        GameObject itemPrefab = GetRandomItem();
-        var item =
-            Instantiate(itemPrefab, new Vector2(-16f, -4f), Quaternion.identity);
-        
-        item.GetComponent<NetworkObject>().Spawn();
-    }
     
     private IEnumerator SpawnEnemySets()
     {
@@ -146,10 +126,10 @@ public class WaveManager : MonoBehaviour
         
         while (_enemiesToSpawn > spawnedEnemies)
         {
-            SpawnEnemyServerRpc();
+            var enemyPrefab = GetRandomEnemy();
+            PhotonNetwork.Instantiate(enemyPrefab.name, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
             EnemiesLeft++;
             spawnedEnemies++;
-            //GameManager.Instance.UIManager.UpdateEnemiesLeftText();
             yield return new WaitForSecondsRealtime(_timeBetweenEnemySpawns);
         }
 

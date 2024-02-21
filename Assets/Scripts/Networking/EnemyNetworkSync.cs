@@ -1,4 +1,3 @@
-/*
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,4 +41,3 @@ public class EnemyNetworkSync : MonoBehaviourPun, IPunObservable
         }
     }
 }
-*/

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
+using Photon.Pun;
 using UnityEngine;
 
-public class WeaponScript : NetworkBehaviour
+public class WeaponScript : MonoBehaviour
 {
+    [SerializeField] private PhotonView _pv;
+    
     [SerializeField] private GameObject _player;
     [SerializeField] private PlayerManager _playerManager;
 
@@ -27,7 +29,7 @@ public class WeaponScript : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner)
+        if (!_pv.IsMine)
             return;
 
         ShootTimer();
@@ -45,7 +47,15 @@ public class WeaponScript : NetworkBehaviour
         Vector3 mousePosition = _playerManager.Camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 shootDirection = (mousePosition - _player.transform.position).normalized;
 
-        ShootBullet();
+        var bullet =
+            PhotonNetwork.Instantiate(_bulletPrefab.name, _gunPoint.position, _gunPoint.rotation);
+
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+
+        bulletScript.BulletSpeed *= _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Range);
+        bulletScript.Damage =
+            _damage * _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Damage);
+        bullet.GetComponent<Rigidbody2D>().velocity += _player.GetComponent<Rigidbody2D>().velocity / 2;
 
         _timeToNextShot = _fireRate;
     }
@@ -54,33 +64,5 @@ public class WeaponScript : NetworkBehaviour
     {
         if (_timeToNextShot > 0)
             _timeToNextShot -= Time.deltaTime;
-    }
-
-    private void ShootBullet()
-    {
-        if (IsClient)
-            SendFireBulletServerRpc();
-        else
-            FireBulletClientRpc();
-    }
-
-    [ServerRpc]
-    private void SendFireBulletServerRpc()
-    {
-        FireBulletClientRpc();
-    }
-
-    [ClientRpc]
-    private void FireBulletClientRpc()
-    {
-        var bullet =
-            Instantiate(_bulletPrefab, _gunPoint.position, _gunPoint.rotation);
-
-        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-
-        bulletScript.BulletSpeed *= _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Range);
-        bulletScript.Damage =
-            _damage * _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Damage);
-        bullet.GetComponent<Rigidbody2D>().velocity += _player.GetComponent<Rigidbody2D>().velocity / 2;
     }
 }

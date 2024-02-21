@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
-using Unity.Netcode.Components;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BulletScript : NetworkBehaviour
+public class BulletScript : MonoBehaviour
 {
+    [SerializeField] private PhotonView _pv;
+    
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private ParticleSystem _bulletCollisionParticles;
     [SerializeField] private string _collisionTag;
@@ -22,9 +23,9 @@ public class BulletScript : NetworkBehaviour
 
     private void Start()
     {
-        _rb.AddForce(transform.right * BulletSpeed, ForceMode2D.Impulse);
-        
-        Destroy(gameObject, _bulletLifetime);
+        _rb.AddForce(transform.right * BulletSpeed);
+
+        StartCoroutine(DestoryBulletRoutine());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,8 +51,14 @@ public class BulletScript : NetworkBehaviour
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag(_collisionTag))
         {
-            Instantiate(_bulletCollisionParticles, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            PhotonNetwork.Instantiate(_bulletCollisionParticles.name, transform.position, Quaternion.identity);
+            PhotonNetwork.Destroy(gameObject);
         }
+    }
+
+    private IEnumerator DestoryBulletRoutine()
+    {
+        yield return new WaitForSecondsRealtime(_bulletLifetime);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

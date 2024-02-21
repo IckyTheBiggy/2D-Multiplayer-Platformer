@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
+using Photon.Pun;
 using UnityEngine;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Referances")] 
+    [SerializeField] private PhotonView _pv;
+    
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private Transform _crosshairSprite;
     
@@ -34,14 +36,17 @@ public class PlayerMovement : NetworkBehaviour
     
     void Start()
     {
-        if (IsOwner)
+        if (_pv.IsMine)
         {
             _playerManager.Camera = _cameras.GetComponentInChildren<Camera>();
             _cameras.transform.parent = null;
         }
-        
-        if (!IsOwner)
+
+        if (!_pv.IsMine)
+        {
+            Destroy(_rb);
             Destroy(_cameras);
+        }
         
         Cursor.visible = false;
         
@@ -50,7 +55,7 @@ public class PlayerMovement : NetworkBehaviour
     
     void Update()
     {
-        if (!IsOwner)
+        if (!_pv.IsMine)
             return;
         
         _horizontalInput = Input.GetAxisRaw("Horizontal");

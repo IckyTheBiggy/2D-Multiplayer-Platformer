@@ -1,20 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class WeaponHolsterScript : MonoBehaviour
 {
+    [SerializeField] private PhotonView _pv;
+    
     [SerializeField] private GameObject _weaponHolsterObject;
     [SerializeField] private GameObject _weaponSlot;
     
-    void Start()
-    {
-        
-    }
-    
     void Update()
     {
+        if (!_pv.IsMine)
+            return;
+        
         Vector3 mousePos = GameManager.Instance.MainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
 
