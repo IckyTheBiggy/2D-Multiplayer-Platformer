@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class EnemyAIScript : MonoBehaviour, IDamageable
 {
     [Header("Referances")] 
+    
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private ParticleSystem _damageParticles;
     
@@ -105,10 +106,11 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
 
         bullet.GetComponent<BulletScript>().Damage = _damage;
     }
-
+    
+    
     public void TakeDamage(float damage)
     {
-        _health -= damage;
+        //_pv.RPC("DamageEnemyRpc", RpcTarget.All, damage);
         
         if (_health <= 0)
         {
@@ -117,11 +119,17 @@ public class EnemyAIScript : MonoBehaviour, IDamageable
                 GameManager.Instance.WaveManager.EnemiesLeft--;
                 //GameManager.Instance.UIManager.UpdateEnemiesLeftText();
                 _alive = false;
-                Destroy(gameObject);
+                //PhotonNetwork.Destroy(gameObject);
             }
         }
 
-        Instantiate(_damageParticles, transform.position, Quaternion.identity);
+        //PhotonNetwork.Instantiate(_damageParticles.name, transform.position, Quaternion.identity);
+    }
+
+    //[PunRPC]
+    private void DamageEnemyRpc(float damage)
+    {
+        _health -= damage;
     }
 
     private void DamagePlayer(GameObject player)

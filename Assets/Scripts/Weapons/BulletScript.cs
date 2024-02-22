@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private PhotonView _pv;
-    
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private ParticleSystem _bulletCollisionParticles;
     [SerializeField] private string _collisionTag;
@@ -51,14 +48,14 @@ public class BulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag(_collisionTag))
         {
-            PhotonNetwork.Instantiate(_bulletCollisionParticles.name, transform.position, Quaternion.identity);
-            PhotonNetwork.Destroy(gameObject);
+            //PhotonNetwork.Instantiate(_bulletCollisionParticles.name, transform.position, Quaternion.identity);
+            //PhotonNetwork.Destroy(gameObject);
         }
     }
 
     private IEnumerator DestoryBulletRoutine()
     {
         yield return new WaitForSecondsRealtime(_bulletLifetime);
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
     }
 }

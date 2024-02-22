@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
+using FishNet.Object;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Referances")] 
-    [SerializeField] private PhotonView _pv;
     
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private Transform _crosshairSprite;
@@ -34,30 +33,35 @@ public class PlayerMovement : MonoBehaviour
 
     private float _initalSpeed;
     
-    void Start()
+    public override void OnStartClient()
     {
-        if (_pv.IsMine)
+        base.OnStartClient();
+
+        if (base.IsOwner)
         {
             _playerManager.Camera = _cameras.GetComponentInChildren<Camera>();
             _cameras.transform.parent = null;
         }
 
-        if (!_pv.IsMine)
+        else
         {
             Destroy(_rb);
             Destroy(_cameras);
+
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<WeaponHolsterScript>().enabled = false;
         }
-        
+    }
+    
+    void Start()
+    {
         Cursor.visible = false;
         
         _initalSpeed = _playerStats.GetStatAmount(PlayerStats.StatTypes.Speed);
     }
-    
+
     void Update()
     {
-        if (!_pv.IsMine)
-            return;
-        
         _horizontalInput = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKey(KeyCode.Space) && IsGrounded())

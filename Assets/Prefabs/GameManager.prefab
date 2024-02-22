@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2716010009515462056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844414494634291928}
+  - component: {fileID: 6916047446060762264}
+  - component: {fileID: 3755718064485223687}
+  - component: {fileID: 6682345604327914791}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844414494634291928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716010009515462056}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6916047446060762264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716010009515462056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4825424653e2f798d7546fccf8f489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pv: {fileID: 6682345604327914791}
+  WaveManager: {fileID: 3755718064485223687}
+--- !u!114 &3755718064485223687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716010009515462056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7505c6374e66b3285aa747a650052b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 9128140884491867971, guid: d8ea8f405a4471270b38bfde07901cb6, type: 3}
+  _enemies:
+  - EnemyPrefab: {fileID: 4968864633513006171, guid: 58f425709afa2bdda942d1db8fc21bd5, type: 3}
+    SpawnChance: 0.7
+  - EnemyPrefab: {fileID: 9128140884491867971, guid: d8ea8f405a4471270b38bfde07901cb6, type: 3}
+    SpawnChance: 0.3
+  _items:
+  - ItemPrefab: {fileID: 7319560678916380852, guid: 68e7cbfba7790b2cf8af5a436ea2539b, type: 3}
+    DropChance: 0.3
+  - ItemPrefab: {fileID: 8426004037946325480, guid: 782928fc78875eba08d0779cc84e41bc, type: 3}
+    DropChance: 0.1
+  - ItemPrefab: {fileID: 7050468956534818562, guid: f23f5852029b869f9ae8b506851c0445, type: 3}
+    DropChance: 0.004
+  _timeBetweenWaves: 20
+  _timeBetweenEnemySetSpawns: 10
+  _timeBetweenEnemySpawns: 0.2
+  _setsToSpawn: 5
+  _enemiesToSpawn: 4
+  EnemiesLeft: 0
+  TimeToNextWave: 0
+--- !u!114 &6682345604327914791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716010009515462056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

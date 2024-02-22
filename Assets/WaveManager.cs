@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -49,7 +48,7 @@ public class WaveManager : MonoBehaviour
         if (_canSpawnNextWave && EnemiesLeft <= 0)
         {
             var itemPrefab = GetRandomItem();
-            PhotonNetwork.Instantiate(itemPrefab.name, new Vector2(-16f, -4f), Quaternion.identity);
+            //PhotonNetwork.Instantiate(itemPrefab.name, new Vector2(-16f, -4f), Quaternion.identity);
             StartCoroutine(SpawnWaveRoutine());
             _canSpawnNextWave = false;
         }
@@ -127,7 +126,7 @@ public class WaveManager : MonoBehaviour
         while (_enemiesToSpawn > spawnedEnemies)
         {
             var enemyPrefab = GetRandomEnemy();
-            PhotonNetwork.Instantiate(enemyPrefab.name, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
+            //PhotonNetwork.Instantiate(enemyPrefab.name, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
             EnemiesLeft++;
             spawnedEnemies++;
             yield return new WaitForSecondsRealtime(_timeBetweenEnemySpawns);

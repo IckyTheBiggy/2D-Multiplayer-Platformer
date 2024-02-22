@@ -33,7 +33,13 @@ public class GameManager : MonoBehaviour
     {
         _instance = GetComponent<GameManager>();
     }
-    
+
+    private void Start()
+    {
+        //if (!_pv.IsMine)
+            //Destroy(gameObject);
+    }
+
     private Camera _mainCam;
     public Camera MainCam => _mainCam = _mainCam == null ? Camera.main : _mainCam;
     

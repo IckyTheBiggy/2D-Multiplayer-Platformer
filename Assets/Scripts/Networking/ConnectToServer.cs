@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -11,11 +12,12 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         {
-            PhotonNetwork.SendRate = 10;
-            PhotonNetwork.SerializationRate = 10;
+            //PhotonNetwork.SendRate = 10;
+            //PhotonNetwork.SerializationRate = 10;
             PhotonNetwork.JoinLobby();
         }
     }
 
     public override void OnJoinedLobby() => SceneManager.LoadScene("Menu");
 }
+*/

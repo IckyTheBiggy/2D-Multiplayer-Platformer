@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    [SerializeField] private PhotonView _pv;
-    
     [SerializeField] private GameObject _player;
     [SerializeField] private PlayerManager _playerManager;
 
@@ -29,9 +26,6 @@ public class WeaponScript : MonoBehaviour
 
     void Update()
     {
-        if (!_pv.IsMine)
-            return;
-
         ShootTimer();
         //_fireRate = _initialFireRate / GameManager.Instance.PlayerStats.GetStatAmount(PlayerStats.StatTypes.ShootSpeed);
 
@@ -47,15 +41,15 @@ public class WeaponScript : MonoBehaviour
         Vector3 mousePosition = _playerManager.Camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 shootDirection = (mousePosition - _player.transform.position).normalized;
 
-        var bullet =
-            PhotonNetwork.Instantiate(_bulletPrefab.name, _gunPoint.position, _gunPoint.rotation);
+        //var bullet =
+            //PhotonNetwork.Instantiate(_bulletPrefab.name, _gunPoint.position, _gunPoint.rotation);
 
-        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+        //BulletScript bulletScript = bullet.GetComponent<BulletScript>();
 
-        bulletScript.BulletSpeed *= _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Range);
-        bulletScript.Damage =
-            _damage * _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Damage);
-        bullet.GetComponent<Rigidbody2D>().velocity += _player.GetComponent<Rigidbody2D>().velocity / 2;
+        //bulletScript.BulletSpeed *= _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Range);
+        //bulletScript.Damage =
+            //_damage * _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Damage);
+        //bullet.GetComponent<Rigidbody2D>().velocity += _player.GetComponent<Rigidbody2D>().velocity / 2;
 
         _timeToNextShot = _fireRate;
     }
