@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -45,11 +47,11 @@ public class PlayerMovement : NetworkBehaviour
 
         else
         {
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            //gameObject.GetComponent<WeaponHolsterScript>().enabled = false;
+            
             Destroy(_rb);
             Destroy(_cameras);
-
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
-            gameObject.GetComponent<WeaponHolsterScript>().enabled = false;
         }
     }
     

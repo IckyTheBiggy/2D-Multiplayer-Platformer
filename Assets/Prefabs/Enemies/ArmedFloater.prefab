@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3157264530004569563, guid: 5a0bf70d10e409f919109488d52119fb, type: 3}
+      propertyPath: <PrefabId>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157264530004569563, guid: 5a0bf70d10e409f919109488d52119fb, type: 3}
+      propertyPath: <AssetPathHash>k__BackingField
+      value: 15382295886167901522
+      objectReference: {fileID: 0}
     - target: {fileID: 6355999437837318225, guid: 5a0bf70d10e409f919109488d52119fb, type: 3}
       propertyPath: m_Name
       value: ArmedFloater

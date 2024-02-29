@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448852612233786842}
   - component: {fileID: 1091932317501740661}
+  - component: {fileID: 6541431864889949136}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -46,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44a460e0f5112fb855577ed24a378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 6541431864889949136}
+  _networkObjectCache: {fileID: 0}
   _player: {fileID: 0}
   _playerManager: {fileID: 0}
   _muzzleFlash: {fileID: 0}
@@ -53,6 +57,38 @@ MonoBehaviour:
   _damage: 10
   _gunPoint: {fileID: 4741146987627859833}
   _bulletPrefab: {fileID: 7331458644505130230, guid: 0b5d77f6c598495649bd534dbee93828, type: 3}
+--- !u!114 &6541431864889949136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794457745069649854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 0
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 0
+  <SceneId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 11589116817743326467
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours: []
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    LocalScale: {x: 0, y: 0, z: 0}
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0
 --- !u!1 &3141685688167331521
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -48,14 +49,14 @@ public class BulletScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag(_collisionTag))
         {
-            //PhotonNetwork.Instantiate(_bulletCollisionParticles.name, transform.position, Quaternion.identity);
-            //PhotonNetwork.Destroy(gameObject);
+            Instantiate(_bulletCollisionParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 
-    private IEnumerator DestoryBulletRoutine()
+    public IEnumerator DestoryBulletRoutine()
     {
         yield return new WaitForSecondsRealtime(_bulletLifetime);
-        //PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

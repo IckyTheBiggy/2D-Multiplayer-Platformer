@@ -97,8 +97,6 @@ GameObject:
   - component: {fileID: 3165262058037438675}
   - component: {fileID: -8015702207929740836}
   - component: {fileID: 4214690915553096804}
-  - component: {fileID: 5328682896750111127}
-  - component: {fileID: 8641248861299724921}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Bullet
@@ -134,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91659c81266fa15db8bee8d6c58fda42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pv: {fileID: 5328682896750111127}
   _rb: {fileID: -8015702207929740836}
   _bulletCollisionParticles: {fileID: 5062204181651002881, guid: fa4e763ff0306d30d8df20cdcddbf175, type: 3}
   _collisionTag: Enemy
@@ -259,42 +256,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
---- !u!114 &5328682896750111127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7331458644505130230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8641248861299724921}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &8641248861299724921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7331458644505130230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
-  m_UseLocal: 1

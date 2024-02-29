@@ -1,17 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 
-public class WeaponHolsterScript : MonoBehaviour
+public class WeaponHolsterScript : NetworkBehaviour
 {
     [SerializeField] private GameObject _weaponHolsterObject;
     [SerializeField] private GameObject _weaponSlot;
     
     void Update()
     {
-        //if (!_pv.IsMine)
-            //return;
+        if (!IsOwner)
+            return;
         
         Vector3 mousePos = GameManager.Instance.MainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;

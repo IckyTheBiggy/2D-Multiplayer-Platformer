@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : NetworkBehaviour
 {
     [Serializable]
     public struct EnemyItem
@@ -48,7 +49,7 @@ public class WaveManager : MonoBehaviour
         if (_canSpawnNextWave && EnemiesLeft <= 0)
         {
             var itemPrefab = GetRandomItem();
-            //PhotonNetwork.Instantiate(itemPrefab.name, new Vector2(-16f, -4f), Quaternion.identity);
+            SpawnItem(itemPrefab);
             StartCoroutine(SpawnWaveRoutine());
             _canSpawnNextWave = false;
         }
@@ -126,12 +127,28 @@ public class WaveManager : MonoBehaviour
         while (_enemiesToSpawn > spawnedEnemies)
         {
             var enemyPrefab = GetRandomEnemy();
-            //PhotonNetwork.Instantiate(enemyPrefab.name, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
+            SpawnEnemy(enemyPrefab);
             EnemiesLeft++;
             spawnedEnemies++;
             yield return new WaitForSecondsRealtime(_timeBetweenEnemySpawns);
         }
 
         yield return null;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnItem(GameObject itemPrefab)
+    {
+        var item =
+            Instantiate(itemPrefab, new Vector2(-16f, -4f), Quaternion.identity);
+        ServerManager.Spawn(item);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnEnemy(GameObject enemyPrefab)
+    {
+        var enemy =
+            Instantiate(enemyPrefab, new Vector3(Random.Range(-40f, 60f), 0f, 0f), Quaternion.identity);
+        ServerManager.Spawn(enemyPrefab);
     }
 }

@@ -88,6 +88,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6950013728615901873, guid: be425d27a25a49a94a0ce61f8e75b496, type: 3}
+      propertyPath: <PrefabId>k__BackingField
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950013728615901873, guid: be425d27a25a49a94a0ce61f8e75b496, type: 3}
+      propertyPath: <AssetPathHash>k__BackingField
+      value: 16012894594349172946
+      objectReference: {fileID: 0}
     - target: {fileID: 6952001894025283509, guid: be425d27a25a49a94a0ce61f8e75b496, type: 3}
       propertyPath: m_Color.b
       value: 0

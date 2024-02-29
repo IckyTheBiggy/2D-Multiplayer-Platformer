@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1844414494634291928}
   - component: {fileID: 6916047446060762264}
   - component: {fileID: 3755718064485223687}
-  - component: {fileID: 6682345604327914791}
+  - component: {fileID: 677758087114908408}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4825424653e2f798d7546fccf8f489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pv: {fileID: 6682345604327914791}
   WaveManager: {fileID: 3755718064485223687}
 --- !u!114 &3755718064485223687
 MonoBehaviour:
@@ -60,6 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7505c6374e66b3285aa747a650052b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 677758087114908408}
+  _networkObjectCache: {fileID: 0}
   _enemyPrefab: {fileID: 9128140884491867971, guid: d8ea8f405a4471270b38bfde07901cb6, type: 3}
   _enemies:
   - EnemyPrefab: {fileID: 4968864633513006171, guid: 58f425709afa2bdda942d1db8fc21bd5, type: 3}
@@ -80,7 +82,7 @@ MonoBehaviour:
   _enemiesToSpawn: 4
   EnemiesLeft: 0
   TimeToNextWave: 0
---- !u!114 &6682345604327914791
+--- !u!114 &677758087114908408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,16 +91,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2716010009515462056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 0
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 0
+  <SceneId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 17981935845437572623
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours: []
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    LocalScale: {x: 0, y: 0, z: 0}
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0

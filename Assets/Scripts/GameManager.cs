@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using UnityEngine;
 using Unity.VisualScripting;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance
@@ -28,16 +29,15 @@ public class GameManager : MonoBehaviour
             _instance = value;
         }
     }
-    
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+    }
+
     private void Awake()
     {
         _instance = GetComponent<GameManager>();
-    }
-
-    private void Start()
-    {
-        //if (!_pv.IsMine)
-            //Destroy(gameObject);
     }
 
     private Camera _mainCam;
