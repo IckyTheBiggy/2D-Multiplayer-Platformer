@@ -95,7 +95,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
         {
             Debug.Log($"Setting velocity on {gameObject.name} to {value}");
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = value;
+            rb.linearVelocity = value;
         }
 
         /// <summary>

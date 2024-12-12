@@ -31,7 +31,7 @@ public class KnockBackBlasterScript : MonoBehaviour
         Vector3 mousePosition = _playerCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 shootDirection = (mousePosition - _playerTransform.position).normalized;
 
-        _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, 0.0f);
         
         _rb.AddForce(shootDirection * -_knockBackForce, ForceMode2D.Impulse);
     }

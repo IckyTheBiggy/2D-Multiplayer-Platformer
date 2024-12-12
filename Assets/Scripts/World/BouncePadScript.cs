@@ -25,8 +25,8 @@ public class BouncePadScript : MonoBehaviour
             var rb =
             other.transform.GetComponent<Rigidbody2D>();
 
-            rb.velocity = Vector2.zero;
-            rb.velocity = new Vector2(rb.velocity.x, _bounceForce);
+            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, _bounceForce);
         }
     }
 }

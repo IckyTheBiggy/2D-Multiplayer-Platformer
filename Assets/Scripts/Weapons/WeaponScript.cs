@@ -74,7 +74,7 @@ public class WeaponScript : NetworkBehaviour
         bulletScript.BulletSpeed *= _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Range);
         bulletScript.Damage =
             _damage * _player.GetComponent<PlayerStats>().GetStatAmount(PlayerStats.StatTypes.Damage);
-        bullet.GetComponent<Rigidbody2D>().velocity += _player.GetComponent<Rigidbody2D>().velocity / 2;
+        bullet.GetComponent<Rigidbody2D>().linearVelocity += _player.GetComponent<Rigidbody2D>().linearVelocity / 2;
 
         _bulletSpeed = bulletScript.BulletSpeed;
         StartCoroutine(bulletScript.DestoryBulletRoutine());

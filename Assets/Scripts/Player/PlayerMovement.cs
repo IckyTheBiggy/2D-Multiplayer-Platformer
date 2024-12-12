@@ -68,12 +68,12 @@ public class PlayerMovement : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.Space) && IsGrounded())
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && _rb.velocity.y > 0.0f)
+        if (Input.GetKeyUp(KeyCode.Space) && _rb.linearVelocity.y > 0.0f)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _rb.linearVelocity.y * 0.5f);
         }
 
         Vector2 mousePos = GameManager.Instance.MainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -86,13 +86,13 @@ public class PlayerMovement : NetworkBehaviour
 
         if (IsGrounded() && Mathf.Approximately(_horizontalInput, 0.0f))
         {
-            float counterForce = -_rb.velocity.x * _counterMovement;
+            float counterForce = -_rb.linearVelocity.x * _counterMovement;
             _rb.AddForce(new Vector2(counterForce, 0.0f), ForceMode2D.Force);
         }
 
-        if (Mathf.Abs(_rb.velocity.x) > _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed))
+        if (Mathf.Abs(_rb.linearVelocity.x) > _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed))
         {
-            _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed), _rb.velocity.y);
+            _rb.linearVelocity = new Vector2(Mathf.Sign(_rb.linearVelocity.x) * _playerStats.GetStatAmount(PlayerStats.StatTypes.MaxSpeed), _rb.linearVelocity.y);
         }
 
         if (_horizontalInput > 0 || _horizontalInput < 0)
